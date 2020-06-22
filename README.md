@@ -9,7 +9,7 @@ To build:
 
 To run:
 
-`java -jar build/libs/spring-boot-with-prometheus-0.1.0.jar`
+`java -Dmanagement.security.enabled=false -jar build/libs/spring-boot-with-prometheus-0.1.0.jar`
 
 The Spring boot application is now running at <http://localhost:8080/>, with a management interface at <http://localhost:8081/>. Most notably, the Prometheus endpoint is running at <http://localhost:8081/prometheus-metrics/>.
 
