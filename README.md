@@ -5,7 +5,7 @@ This an example of how to use and configure Prometheus with Spring Boot. More de
 ## Usage
 To build:
 
-`./gradlew build`
+`./gradlew clean build`
 
 To run:
 
