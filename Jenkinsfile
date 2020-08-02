@@ -41,5 +41,13 @@ pipeline {
                 }
             }
         }
+        stage('building docker image and pushing it to dockerhub') {
+            steps {
+                script {
+                    sh "cd DOCKER; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                }
+            }
+        }
     }
 }
