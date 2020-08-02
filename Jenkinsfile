@@ -50,5 +50,13 @@ pipeline {
                 }
             }
         }
+        stage('deploying helm chart on kubernetes') {
+            steps {
+                script {
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.174.204.252 helm upgrade --install salesforcedrillers /home/ubuntu/devopschart --set replicaCount=2 --set image.tag=v_${BUILD_NUMBER}; kubectl rollout status
+                    deployment.apps/salesforcedrillers-devopschart"
+                }
+            }
+        }
     }
 }
