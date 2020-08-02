@@ -20,5 +20,12 @@ pipeline {
                 }
             }
         }
+        stage('list the created build file') {
+            steps {
+                script {
+                    sh "ls build/libs/"
+                }
+            }
+        }
     }
 }
