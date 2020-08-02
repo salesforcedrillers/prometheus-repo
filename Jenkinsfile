@@ -10,6 +10,7 @@ pipeline {
                 script {
                     sh "ls"
                     sh "pwd"
+                    sh "whoami"
                 }
             }
         }
