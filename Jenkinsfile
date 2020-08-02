@@ -5,9 +5,12 @@ pipeline {
         }
     }
     stages {
-        stage('Hello') {
+        stage('list repo contents and working directory') {
             steps {
-                echo 'Hello World'
+                script {
+                    sh "ls"
+                    sh "pwd"
+                }
             }
         }
     }
