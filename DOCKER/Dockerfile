@@ -5,4 +5,4 @@ COPY spring-boot-with-prometheus-0.1.0.jar /spring-boot-with-prometheus-0.1.0.ja
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT [ "/entrypoint.sh" ]
-HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
+#HEALTHCHECK CMD curl --fail http://localhost:8080/ || exit 1
