@@ -54,6 +54,7 @@ pipeline {
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker rm devops-flow"
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker ps"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker images > unused_images_cid"
                 }
             }
         }
@@ -73,7 +74,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker images -a -q > /home/ubuntu/unused_images_cid; sudo docker rmi `cat unused_images_cid`"
+                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker rmi `cat unused_images_cid`"
                     } catch (err) {
                         echo err.getMessage()
                     }
