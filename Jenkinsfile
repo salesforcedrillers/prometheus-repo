@@ -1,9 +1,5 @@
 pipeline {
-    agent {
-        node {
-            label 'java-node'
-        }
-    }
+    agent any
     stages {
         stage('list repo contents and working directory') {
             steps {
@@ -63,3 +59,4 @@ pipeline {
         }
     }
 }
+
