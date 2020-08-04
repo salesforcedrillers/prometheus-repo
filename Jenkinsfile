@@ -41,19 +41,19 @@ pipeline {
         stage('building docker image and pushing it to dockerhub') {
             steps {
                 script {
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@54.87.234.62 cd /home/ubuntu/jenkins/workspace/devops-flow-salesforcedrillers/devops-flow-pipeline/DOCKER/; pwd; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER} ."
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@54.87.234.62 sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "cd DOCKER; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER} ."
+                    sh "sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
                 }
             }
         }
         stage('running container') {
             steps {
                 script {
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker pull salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker kill devops-flow"
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker rm devops-flow"
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker ps"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker pull salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker kill devops-flow"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rm devops-flow"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker ps"
                 }
             }
         }
