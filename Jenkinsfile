@@ -60,9 +60,13 @@ pipeline {
         stage('remove unused images') {
             steps {
                 script {
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker images -a -q > unused_images_id"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker rmi `cat unused_images_id`"
+                    try {
+                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker images -a -q > unused_images_cid; sudo docker rmi `cat unused_images_cid`"
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
                 }
+                echo currentBuild.result
             }
         }
     }
