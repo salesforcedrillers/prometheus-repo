@@ -73,7 +73,7 @@ pipeline {
             steps {
                 script {
                     try {
-                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker images -a -q > unused_images_cid; sudo docker rmi `cat unused_images_cid`"
+                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@34.239.254.117 sudo docker images -a -q > /home/ubuntu/unused_images_cid; sudo docker rmi `cat unused_images_cid`"
                     } catch (err) {
                         echo err.getMessage()
                     }
