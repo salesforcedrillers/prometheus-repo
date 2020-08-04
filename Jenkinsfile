@@ -60,8 +60,13 @@ pipeline {
         stage ('remove images from build server') {
             steps {
                 script {
-                    sh "sudo docker images -a -q > images_cid; sudo docker rmi `cat images_cid`"
+                    try {
+                        sh "sudo docker images -a -q > images_cid; sudo docker rmi `cat images_cid`"
+                    } catch (err) {
+                        echo err.getMessage()
+                    }
                 }
+                echo currentBuild.result
             }
         }
         stage('remove unused images') {
