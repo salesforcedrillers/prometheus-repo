@@ -49,11 +49,11 @@ pipeline {
         stage('running container') {
             steps {
                 script {
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker pull salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker kill devops-flow"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rm devops-flow"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker ps"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker pull salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker kill devops-flow"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker rm devops-flow"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@52.71.197.193 sudo docker ps"
                 }
             }
         }
