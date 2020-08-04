@@ -41,7 +41,7 @@ pipeline {
         stage('building docker image and pushing it to dockerhub') {
             steps {
                 script {
-                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@54.87.234.62 cd /home/ubuntu/jenkins/workspace/devops-flow-salesforcedrillers/devops-flow-pipeline/DOCKER/; pwd; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER} ."
+                    sh "cd /var/jenkins_home; ssh -i drillers.pem ubuntu@54.87.234.62 cd /home/ubuntu/jenkins/workspace/devops-flow-salesforcedrillers/devops-flow-pipeline/DOCKER/; pwd; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER} ."
                     sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@54.87.234.62 sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
                 }
             }
