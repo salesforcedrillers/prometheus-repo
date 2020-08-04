@@ -54,7 +54,8 @@ pipeline {
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rm devops-flow"
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker ps"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rmi \"${sudo docker images -a -q}\""
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker images -a -q > unused_images_id"
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rmi `cat unused_images_id`"
                 }
             }
         }
