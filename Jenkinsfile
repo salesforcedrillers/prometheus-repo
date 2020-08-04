@@ -53,8 +53,11 @@ pipeline {
         stage('deploying helm chart on kubernetes') {
             steps {
                 script {
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@35.174.204.252 helm upgrade --install salesforcedrillers /home/ubuntu/devopschart --set replicaCount=2 --set image.tag=v_${BUILD_NUMBER}"
-                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@35.174.204.252 kubectl rollout status deployment.apps/salesforcedrillers-devopschart"
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker pull salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker kill devops-flow"
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker rm devops-flow"
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker run -it --name devops-flow -p 8080:8080 -d salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+                    sh "ssh -i /var/jenkins_home/drillers.pem ubuntu@35.175.213.50 sudo docker ps"
                 }
             }
         }
