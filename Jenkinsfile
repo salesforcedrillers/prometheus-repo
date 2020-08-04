@@ -61,14 +61,14 @@ pipeline {
             steps {
                 script {
                     sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker images -a -q > unused_images_id"
-                    try {
-                        sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rmi `cat unused_images_id`"
-                    } catch (err) {
-                        echo err.getMessage()
-                    }
+                    sh "ssh -i /home/ubuntu/drillers.pem ubuntu@54.80.32.242 sudo docker rmi `cat unused_images_id"
                 }
-                echo curentBuild.result
             }
+        }
+    }
+    post {
+        always {
+            echo 'SUCCESS'
         }
     }
 }
