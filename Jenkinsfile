@@ -40,14 +40,28 @@ pipeline {
                 }
             }
         }
-        stage('building docker image and pushing it to dockerhub') {
+        stage('building docker image') {
             steps {
                 script {
                     sh "cd DOCKER; sudo docker build -t salesforcedrillers/devops-flow:v_${BUILD_NUMBER} ."
-                    sh "sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
                 }
             }
         }
+        stage('dockerlogin') {
+         steps {
+             script {
+                 docker.withRegistry('b51af114-1417-4402-ab6a-4a745d4d437d') {
+                 }
+             }
+         }
+      }
+      stage('dcoker push') {
+          steps {
+              script {
+                  sh "sudo docker push salesforcedrillers/devops-flow:v_${BUILD_NUMBER}"
+              }
+          }
+      }
         stage('running container') {
             steps {
                 script {
