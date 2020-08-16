@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        label 'aws-ec2'
+    }
     stages {
         stage('list repo contents and working directory') {
             steps {
